@@ -1,0 +1,9 @@
+description: This function fetches the weather for a given city
+
+slots:
+  - name: city
+    description: The name of the city used in its country
+
+target:
+  type: function
+  name: fetch_weather_info
