@@ -5,8 +5,5 @@ slots:
 
 target:
   type: function
-<<<<<<<< Updated upstream:capabilities/helloworld/scenarios/GetEmail.yaml
   name: GetEmail
-========
-  name: get/FetchEmailFunction
->>>>>>>> Stashed changes:capabilities/helloworld/scenarios/get/FetchEmailScenario.yaml
+
