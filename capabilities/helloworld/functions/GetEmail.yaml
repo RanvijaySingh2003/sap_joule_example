@@ -1,6 +1,5 @@
 parameters:
   - name: personIdExternal # Technical name of the parameter to identify the employee.
-    optional: true
 
 action_groups:
   # - actions:

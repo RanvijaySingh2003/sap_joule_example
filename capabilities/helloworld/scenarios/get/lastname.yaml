@@ -1,0 +1,10 @@
+description:  Candidate ID for greeting
+
+slots:
+  - name: candidate_id
+    description: ID of the candidate for greeting
+
+target:
+  type: function
+  name: GetLastname
+
