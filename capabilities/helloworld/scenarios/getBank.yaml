@@ -5,4 +5,4 @@ description: This scenario is designed to fetch / get the Bank Details.
 
 target:
   type: function
-  name: getBank
+  name: GetBank

@@ -8,4 +8,4 @@ slots:
 
 target:
   type: function
-  name: postemail
+  name: PostEmail

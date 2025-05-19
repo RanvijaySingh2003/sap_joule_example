@@ -6,5 +6,5 @@ slots:
 
 target:
   type: function
-  name: lastname
+  name: GetLastname
 

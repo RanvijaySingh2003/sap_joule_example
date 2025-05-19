@@ -5,4 +5,4 @@ slots:
 
 target:
   type: function
-  name: GetSocialMediaURL
+  name: GetSocialMedia

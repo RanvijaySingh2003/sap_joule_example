@@ -6,4 +6,4 @@ slots:
 
 target:
   type: function
-  name: GetDateOfBirthFromPersonID
+  name: GetDateOfBirth
