@@ -1,0 +1,41 @@
+parameters:
+  - name: personIdExternal
+  - name: NewEmail
+
+action_groups:
+  - condition: personIdExternal == null 
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Missing personId. Please provide a valid Bank Code."
+
+  - condition: personIdExternal != null
+    actions:
+      - type: api-request
+        method: POST
+        system_alias: SFSF
+        path: "/odata/v2/upsert?$format=json"
+        headers:
+          Accept: application/json
+          Content-Type: application/json
+        body:
+          __metadata:
+            uri: "PerEmail(emailType='889',personIdExternal='<?personIdExternal?>')"
+            type: "SFOData.PerEmail"
+          emailAddress: "<? NewEmail ?>"
+        result_variable: result
+
+  - condition: result != null && result.status_code == 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Email for '<?personIdExternal?>' was successfully posted."
+
+  - condition: result != null && result.status_code != 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Failed to post email. Status: <?result.status_code?>. Error: <?result.body.error.message?>"

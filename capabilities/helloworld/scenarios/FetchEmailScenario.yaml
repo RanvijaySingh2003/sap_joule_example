@@ -1,0 +1,8 @@
+description: This scenario is designed to fetch / get the email address of an employee. It supports both get my / mine email or get someone else email  using their employee ID.
+slots:
+  - name: personIdExternal
+    description: The unique identifier for the employee whose email address is to be fetched. Expected format is a string representing the employee ID.
+
+target:
+  type: function
+  name: FetchEmailFunction

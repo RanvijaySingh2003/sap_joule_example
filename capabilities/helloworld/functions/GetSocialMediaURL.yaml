@@ -1,0 +1,34 @@
+parameters:
+  - name: personIdExternal
+
+action_groups:
+  - condition: personIdExternal == null
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Please provide a valid person ID."
+
+  - condition: personIdExternal != null
+    actions:
+      - type: api-request
+        method: GET
+        system_alias: SFSF
+        path: "/odata/v2/PerSocialAccount?$filter=personIdExternal%20eq%20'<?personIdExternal?>'"
+        headers:
+          Accept: application/json
+        result_variable: social_media_info
+
+  - condition: social_media_info != null && social_media_info.status_code == 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Social Media URL: <? social_media_info.body.d.results[0].url ?>"
+
+  - condition: social_media_info != null && social_media_info.status_code != 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Error retrieving social media information: Status <? social_media_info.status_code ?>. Details: <? social_media_info.body.error.message ?>"

@@ -1,0 +1,35 @@
+parameters:
+  - name: personIdExternal
+
+action_groups:
+  - condition: personIdExternal == null
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Please provide a valid Person ID."
+
+  - condition: personIdExternal != null
+    actions:
+      - type: api-request
+        method: GET
+        system_alias: SFSF
+        path: "/odata/v2/PerPerson?$filter=personIdExternal%20eq%20'<?personIdExternal?>'"
+        headers:
+          Accept: application/json
+        result_variable: person_data
+
+  - condition: person_data != null && person_data.status_code == 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Date of Birth: <? person_data.body.d.results[0].dateOfBirth ?>"
+         
+
+  - condition: person_data != null && person_data.status_code != 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Error retrieving data: Status <? person_data.status_code ?>."

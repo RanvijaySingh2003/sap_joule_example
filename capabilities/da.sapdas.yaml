@@ -1,8 +1,5 @@
 schema_version: 1.0.0
+name: test_r
 capabilities:
   - type: local
     folder: ./helloworld
-  - type: local
-    folder: ./weather_response_gen
-  - type: local
-    folder: ./products

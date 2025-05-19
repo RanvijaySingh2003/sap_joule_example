@@ -1,0 +1,24 @@
+action_groups:
+  - actions: 
+    - type: api-request
+      method: GET
+      system_alias: SFSF
+      path: "/rest/ecosystem/digitalassistant/v1/myUserInfo"
+      result_variable: http_resp
+    - type: set-variables
+      variables:
+        # handle time out issue
+        - name: status_code
+          value: <? http_resp.has("status_code")?http_resp.status_code:500 ?>
+result:
+  init_failed: <? status_code!=200 ?>
+  init_success: <? status_code == 200 ?>
+  init_no_permission: <? status_code == 403 ?>
+  active_assignment: <? status_code==200?http_resp.body.activeAssignment:null ?>
+  user_uuid: <? status_code==200?http_resp.body.assignmentUUID:null ?>
+  user_id: <? status_code==200?http_resp.body.userId:null ?>
+  person_id: <? status_code==200?http_resp.body.personExternalId:null ?>
+  learning_url: <? status_code==200?http_resp.body.learningUrl:null ?>
+  date_format_pattern: "ll"
+  time_format_pattern: "LT"
+  date_time_format_pattern: "ll, LT"

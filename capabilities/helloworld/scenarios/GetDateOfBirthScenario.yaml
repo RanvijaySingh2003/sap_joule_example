@@ -1,0 +1,9 @@
+description: Retrieve the date of birth using a person ID.
+
+slots:
+  - name: personIdExternal
+    description: The unique identifier for the person whose date of birth is being requested.
+
+target:
+  type: function
+  name: GetDateOfBirthFromPersonID

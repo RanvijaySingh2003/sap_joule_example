@@ -1,8 +1,17 @@
-schema_version: 3.3.0
+schema_version: 3.4.0
 
 metadata:
   namespace: com.sap.das.demo
-  name: helloworld_capability
+  name: helloworld
   version: 1.0.0
   display_name: "Hello World Capability"
   description: This capability says hello world.
+  
+system_aliases:
+  SFSF:
+    destination: SFSF_SSO
+
+
+
+
+

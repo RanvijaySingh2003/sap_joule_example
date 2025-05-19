@@ -1,0 +1,11 @@
+description: This scenario will Update / change / post the email with the new email.
+
+slots:
+  - name: personIdExternal
+    description: The unique identifier for the person whose date of birth is being requested.
+  - name: NewEmail
+    description: New Email, which will update the older email.
+
+target:
+  type: function
+  name: postemail

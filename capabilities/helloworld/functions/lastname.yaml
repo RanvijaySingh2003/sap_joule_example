@@ -1,0 +1,59 @@
+# parameters:
+#   - name: candidate_id
+# action_groups:
+#   - condition: candidate_id != null
+#     actions:
+#       - type: message
+#         message: 
+#           type: text 
+#           content: "Hello <? candidate_id ?> from joule function!"
+
+#   - condition: candidate_id == null
+#     actions:
+#       - type: message
+#         message:
+#           type: text
+#           content: "Hello world woooooww from joule function!"
+
+#   - actions:
+#       - condition: candidate_id != null
+#         type: api-request
+#         method: GET
+#         system_alias: SFSF
+#         path: "/odata/v2/Candidate('<? candidate_id ?>')"
+#         headers:
+#           Accept: application/json
+#         result_variable: candidate_data
+
+parameters:
+  - name: candidate_id
+
+action_groups:
+  - condition: candidate_id == null
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Hello world woooooww from joule function!"
+
+  - condition: candidate_id != null
+    actions:
+      - type: api-request
+        method: GET
+        system_alias: SFSF
+        path: "/odata/v2/Candidate(<?candidate_id?>)"
+
+        headers:
+          Accept: application/json
+        result_variable: candidate_data
+
+  - condition: candidate_data != null
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Candidate last name is <? candidate_data.body.d.lastName ?> "
+
+
+
+

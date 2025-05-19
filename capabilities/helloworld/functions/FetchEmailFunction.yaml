@@ -1,0 +1,36 @@
+parameters:
+  - name: personIdExternal # Technical name of the parameter to identify the employee.
+    optional: true
+
+action_groups:
+  # - actions:
+  #     - type: set-variables
+  #       variables:
+  #         - name: login_user_id
+  #           value: <? $initial_context.user_id ?>
+  #         - name: myPersonIdExternal
+  #           value: <? $initial_context.person_id ?> 
+
+  - condition: personIdExternal != null
+    actions:
+      - type: api-request
+        method: GET
+        system_alias: SFSF
+        path: "/odata/v2/PerEmail?$filter=personIdExternal%20eq%20'<?personIdExternal?>'"
+        headers:
+          Accept: application/json
+        result_variable: email_data
+
+  - condition: email_data != null && email_data.status_code == 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Email Address: <? email_data.body.d.results[0].emailAddress ?>"
+
+  - condition: email_data != null && email_data.status_code != 200
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Error fetching email: Status <? email_data.status_code ?>. Details: <? email_data.body.error.message ?>"

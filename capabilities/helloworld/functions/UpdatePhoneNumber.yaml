@@ -1,0 +1,37 @@
+parameters:
+  - name: personIdExternal
+  - name: phoneNumber
+ 
+
+action_groups:
+  - condition: personIdExternal != null && phoneNumber != null
+    actions:
+      - type: api-request
+        method: POST
+        system_alias: SFSF
+        path: "/odata/v2/upsert"
+        headers:
+          Accept: application/json
+          Content-Type: application/json
+        body:
+          __metadata:
+            uri: "PerPhone"
+            type: "SFOData.PerPhone"
+          phoneType: "905"
+          personIdExternal: "<?personIdExternal?>"
+          phoneNumber: "<?phoneNumber?>"
+        result_variable: update_phone_response
+
+  - condition: update_phone_response != null && update_phone_response.status_code >= 200 && update_phone_response.status_code < 300
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Phone number update successful."
+
+  - condition: update_phone_response != null && update_phone_response.status_code >= 400
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Phone number update failed. Details: "

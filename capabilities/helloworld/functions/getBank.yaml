@@ -1,0 +1,29 @@
+parameters: []
+
+action_groups:
+  - condition: true
+    actions:
+      - type: api-request
+        method: GET
+        system_alias: SFSF
+        path: "/odata/v2/Bank"
+        headers:
+          Accept: application/json
+        result_variable: bankInfo
+
+  - condition: "bankInfo == null"
+    actions:
+      - type: message
+        message:
+          type: text
+          content: "Data not found: bankInfo is empty."
+
+  - condition: "bankInfo != null"
+    actions:
+      - type: message
+        message:
+          type: text
+          content: " Bank data retrieved:
+            - Name: <? bankInfo.body.d.results[1].bankName ?>
+            - Branch: <? bankInfo.body.d.results[1].bankBranch ?>
+            - Code: <? bankInfo.body.d.results[1].externalCode ?>"

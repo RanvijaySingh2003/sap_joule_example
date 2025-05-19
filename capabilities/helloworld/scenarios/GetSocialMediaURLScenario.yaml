@@ -1,0 +1,8 @@
+description: "Scenario to retrieve social media URL using person ID."
+slots:
+  - name: personIdExternal
+    description: "The external ID of the person whose social media URL is to be retrieved. Expected format is a string."
+
+target:
+  type: function
+  name: GetSocialMediaURL

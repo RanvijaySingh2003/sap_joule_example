@@ -1,0 +1,8 @@
+description: This scenario is designed to fetch / get the Bank Details.
+# slots:
+#   - name: personIdExternal
+#     description: The unique identifier for the employee whose email address is to be fetched. Expected format is a string representing the employee ID.
+
+target:
+  type: function
+  name: getBank

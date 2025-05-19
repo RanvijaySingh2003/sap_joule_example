@@ -1,0 +1,11 @@
+description: "This scenario will change/update phone number using their person ID."
+slots:
+  - name: personIdExternal
+    description: "The unique identifier for the person whose phone number needs to be updated. This ID will be used to locate the correct record."
+  - name: phoneNumber
+    description: "The new phone number that will replace the existing one for the specified person."
+
+
+target:
+  type: function
+  name: UpdatePhoneNumber
