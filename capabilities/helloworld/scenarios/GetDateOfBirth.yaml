@@ -6,8 +6,6 @@ slots:
 
 target:
   type: function
-<<<<<<<< Updated upstream:capabilities/helloworld/scenarios/GetDateOfBirth.yaml
   name: GetDateOfBirth
-========
-  name: get/GetDateOfBirthFromPersonID
->>>>>>>> Stashed changes:capabilities/helloworld/scenarios/get/GetDateOfBirthScenario.yaml
+
+

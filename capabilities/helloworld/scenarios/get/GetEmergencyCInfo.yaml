@@ -1,9 +1,0 @@
-description: "Scenario to retrieve emergency contact information using person ID, name, relation."
-slots:
-  - name: personIdExternal
-    description: "The external ID of the person whose emergency contact information is to be retrieved. Expected format is a string."
-  
-
-target:
-  type: function
-  name: GetEmergencyInfo
